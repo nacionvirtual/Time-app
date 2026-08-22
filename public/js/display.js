@@ -140,11 +140,11 @@ document.addEventListener('DOMContentLoaded', () => {
   socket.on('alert_triggered', (data) => {
     showAlert(data.message || 'TIEMPO');
     playAlertBeep();
+  });
 
-    // Si el dispositivo vibra
-    if ('vibrate' in navigator) {
-      navigator.vibrate([200, 100, 200, 100, 400]);
-    }
+  // Parada de alerta recibida desde el Móvil 1
+  socket.on('alert_stopped', () => {
+    showBlackScreen();
   });
 
   const rotateBtn = document.getElementById('rotateBtn');
