@@ -152,11 +152,12 @@ document.addEventListener('DOMContentLoaded', () => {
     showBlackScreen();
   });
 
-  // Función para mostrar la pantalla ROJA con "TIEMPO"
+  // Función para mostrar la pantalla ROJA con "TIEMPO" de arriba a abajo
   function showAlert(msg) {
     displayScreen.classList.remove('idle');
     displayScreen.classList.add('alert');
-    alertText.textContent = msg;
+    const text = (msg || 'TIEMPO').toUpperCase();
+    alertText.innerHTML = text.split('').map(char => `<span>${char}</span>`).join('');
   }
 
   // Función para poner la pantalla en NEGRO total
