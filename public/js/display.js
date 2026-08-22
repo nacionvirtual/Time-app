@@ -147,17 +147,32 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Parada de alerta recibida desde el Móvil 1
-  socket.on('alert_stopped', () => {
-    showBlackScreen();
-  });
+  const rotateBtn = document.getElementById('rotateBtn');
+  let currentRotation = 90; // 90 por defecto para que se lea horizontal con el móvil vertical
 
-  // Función para mostrar la pantalla ROJA con "TIEMPO" de arriba a abajo
+  if (rotateBtn) {
+    rotateBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (currentRotation === 90) {
+        currentRotation = -90;
+        alertText.classList.remove('rot-0');
+        alertText.classList.add('rot-270');
+      } else if (currentRotation === -90) {
+        currentRotation = 0;
+        alertText.classList.remove('rot-270');
+        alertText.classList.add('rot-0');
+      } else {
+        currentRotation = 90;
+        alertText.classList.remove('rot-0', 'rot-270');
+      }
+    });
+  }
+
+  // Función para mostrar la pantalla ROJA con "TIEMPO" escrito horizontal y parpadeando
   function showAlert(msg) {
     displayScreen.classList.remove('idle');
     displayScreen.classList.add('alert');
-    const text = (msg || 'TIEMPO').toUpperCase();
-    alertText.innerHTML = text.split('').map(char => `<span>${char}</span>`).join('');
+    alertText.textContent = (msg || 'TIEMPO').toUpperCase();
   }
 
   // Función para poner la pantalla en NEGRO total

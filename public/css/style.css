@@ -385,39 +385,83 @@ body.display-mode {
   height: 100%;
 }
 
-/* PALABRA ESCRITA DE ARRIBA A ABAJO Y CON PARPADEO */
-.alert-vertical {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  line-height: 0.88;
+/* PALABRA ESCRITA NORMAL PERO ORIENTADA EN HORIZONTAL (ROTADA 90°) */
+.alert-text-horizontal {
   font-family: 'Outfit', -apple-system, sans-serif;
-  font-size: clamp(3.2rem, 13.5vh, 8.5rem);
+  font-size: clamp(4rem, 16vh, 10rem);
   font-weight: 900;
   color: #ffffff;
-  text-shadow: 0 8px 35px rgba(0, 0, 0, 0.8);
-  animation: blink-text 0.45s infinite ease-in-out;
+  letter-spacing: 0.08em;
+  text-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+  white-space: nowrap;
+  transform: rotate(90deg);
+  transform-origin: center center;
   user-select: none;
+  animation: blink-text 0.45s infinite ease-in-out;
+  display: block;
 }
 
-.alert-vertical span {
-  display: block;
-  line-height: 0.85;
+.alert-text-horizontal.rot-270 {
+  transform: rotate(-90deg);
+}
+
+.alert-text-horizontal.rot-0 {
+  transform: rotate(0deg);
+}
+
+/* Si el dispositivo se pone en horizontal físico */
+@media (orientation: landscape) {
+  .alert-text-horizontal {
+    transform: rotate(0deg);
+    font-size: clamp(5rem, 28vh, 16rem);
+  }
 }
 
 @keyframes blink-text {
   0%, 100% {
     opacity: 1;
-    transform: scale(1);
+    transform: rotate(90deg) scale(1);
     text-shadow: 0 0 35px rgba(255, 255, 255, 0.9), 0 8px 30px rgba(0, 0, 0, 0.8);
   }
   50% {
     opacity: 0.18;
-    transform: scale(0.97);
+    transform: rotate(90deg) scale(0.97);
     text-shadow: none;
   }
 }
+
+/* Variantes de parpadeo según rotación */
+.alert-text-horizontal.rot-270 {
+  animation-name: blink-text-270;
+}
+@keyframes blink-text-270 {
+  0%, 100% {
+    opacity: 1;
+    transform: rotate(-90deg) scale(1);
+  }
+  50% {
+    opacity: 0.18;
+    transform: rotate(-90deg) scale(0.97);
+  }
+}
+
+.alert-text-horizontal.rot-0,
+@media (orientation: landscape) {
+  .alert-text-horizontal {
+    animation-name: blink-text-0;
+  }
+}
+@keyframes blink-text-0 {
+  0%, 100% {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    opacity: 0.18;
+    transform: rotate(0deg) scale(0.97);
+  }
+}
+
 
 
 
