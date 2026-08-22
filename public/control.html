@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Móvil 1 · Mando de Control</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <main class="app-container">
+    <header class="header">
+      <div class="badge">
+        <span class="badge-dot" id="connectionDot"></span>
+        <span id="connectionText">Conectando...</span>
+      </div>
+      <h1 class="title">Móvil 1 · Mando</h1>
+      <p class="subtitle">Controla la alerta visual del Móvil 2</p>
+    </header>
+
+    <div class="control-panel">
+      <!-- Tarjeta de estado -->
+      <div class="status-card">
+        <div class="status-header">
+          <span>ESTADO EN PANTALLA</span>
+          <span>📺 Pantallas activas: <b id="activeDisplaysCount">0</b></span>
+        </div>
+        <div class="status-current alert-idle" id="currentStatus">
+          <span id="statusText">⚫ EN REPOSO (Pantalla Negra)</span>
+        </div>
+      </div>
+
+      <!-- Botón 1: Activar Alerta "TIEMPO" (Rojo) -->
+      <button class="btn-action btn-trigger" id="btnTrigger">
+        <span>🚨 ACTIVAR AVISO</span>
+        <span class="subtext">Pone el Móvil 2 en ROJO con "TIEMPO"</span>
+      </button>
+
+      <!-- Botón 2: Parar Alerta / Pantalla Negra -->
+      <button class="btn-action btn-stop" id="btnStop">
+        <span>⏹️ PARAR AVISO</span>
+        <span class="subtext">Pone el Móvil 2 en NEGRO total</span>
+      </button>
+    </div>
+  </main>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/control.js"></script>
+</body>
+</html>

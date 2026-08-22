@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Aviso en Tiempo Real | Selector de Dispositivo</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <main class="app-container">
+    <header class="header">
+      <div class="badge">
+        <span class="badge-dot active"></span>
+        <span>Sistema de Avisos en Vivo</span>
+      </div>
+      <h1 class="title">Control de Aviso</h1>
+      <p class="subtitle">Selecciona el rol de este dispositivo o escanea con tus móviles</p>
+    </header>
+
+    <section class="card-grid">
+      <!-- Opción Móvil 1 -->
+      <a href="/control.html" class="role-card">
+        <div class="role-icon control">📱</div>
+        <div class="role-info">
+          <h3>Móvil 1 · Mando Emisor</h3>
+          <p>Botones táctiles para lanzar el aviso de "TIEMPO" y apagar la pantalla.</p>
+        </div>
+      </a>
+
+      <!-- Opción Móvil 2 -->
+      <a href="/display.html" class="role-card">
+        <div class="role-icon display">📺</div>
+        <div class="role-info">
+          <h3>Móvil 2 · Pantalla Visual</h3>
+          <p>Muestra el aviso rojo con "TIEMPO" y evita que el teléfono se suspenda o apague.</p>
+        </div>
+      </a>
+    </section>
+
+    <!-- Códigos QR para escanear en red local -->
+    <section class="qr-section" id="qrSection">
+      <h4>Escanea con tu cámara en la misma red Wi-Fi</h4>
+      <div class="qr-container">
+        <div class="qr-card">
+          <img id="qrControl" alt="QR Móvil 1">
+          <span>📱 Móvil 1 (Mando)</span>
+        </div>
+        <div class="qr-card">
+          <img id="qrDisplay" alt="QR Móvil 2">
+          <span>📺 Móvil 2 (Pantalla)</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Cargar códigos QR del servidor
+    fetch('/api/info')
+      .then(res => res.json())
+      .then(data => {
+        if (data.qrs) {
+          document.getElementById('qrControl').src = data.qrs.control;
+          document.getElementById('qrDisplay').src = data.qrs.display;
+        }
+      })
+      .catch(err => {
+        console.warn('No se pudieron cargar los códigos QR:', err);
+      });
+  </script>
+</body>
+</html>

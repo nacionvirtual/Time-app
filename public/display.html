@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Móvil 2 · Pantalla Visual</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="display-mode">
+  <!-- Modal inicial para activar permisos de Wake Lock y Audio con toque -->
+  <div class="start-modal" id="startModal">
+    <div class="badge">
+      <span class="badge-dot" id="connectionDot"></span>
+      <span id="connectionStatus">Conectando...</span>
+    </div>
+    <h2>📱 Móvil 2 · Modo Pantalla</h2>
+    <p>Toca el botón para activar la pantalla. Esto <b>evitará que el móvil se apague o bloquee</b> y lo pondrá listo para recibir el aviso de "TIEMPO".</p>
+    <button class="btn-start" id="btnStart">INICIAR PANTALLA</button>
+  </div>
+
+  <!-- Pantalla principal (Negro en reposo / Rojo con TIEMPO en alerta) -->
+  <div class="display-screen idle" id="displayScreen">
+    <!-- Barra superior de estado flotante y sutil -->
+    <div class="display-overlay">
+      <div class="wakelock-indicator">
+        <span class="wakelock-dot" id="wakelockDot"></span>
+        <span id="wakelockStatus">Wake Lock Inactivo</span>
+      </div>
+      <button class="fullscreen-btn" id="fullscreenBtn">⛶ Pantalla Completa</button>
+    </div>
+
+    <!-- Contenido de Alerta (Visible sólo cuando se activa) -->
+    <div class="alert-content">
+      <h1 class="alert-text" id="alertText">TIEMPO</h1>
+    </div>
+
+    <div class="display-help">
+      <span>(Pantalla siempre activa)</span>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/wake-lock.js"></script>
+  <script src="/js/display.js"></script>
+</body>
+</html>

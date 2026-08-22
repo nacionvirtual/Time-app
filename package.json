@@ -1,0 +1,14 @@
+{
+  "name": "app-aviso-tiempo",
+  "version": "1.0.0",
+  "description": "App web de aviso de tiempo en tiempo real entre dos móviles con prevención de bloqueo de pantalla",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "qrcode": "^1.5.3",
+    "socket.io": "^4.7.5"
+  }
+}
